@@ -336,7 +336,7 @@ h1, h2, h3, h4 {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 140px var(--pad) 80px;
+  padding: 140px 0 80px var(--pad);
   overflow: hidden;
 }
 
@@ -362,12 +362,15 @@ h1, h2, h3, h4 {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: clamp(40px, 6vw, 100px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: clamp(40px, 6vw, 90px);
   align-items: center;
   width: 100%;
-  max-width: var(--container);
-  margin: 0 auto;
+}
+
+.hero-content {
+  max-width: 580px;
+  padding-right: var(--pad);
 }
 
 .hero-content .eyebrow { margin-bottom: 22px; }
@@ -425,9 +428,9 @@ h1, h2, h3, h4 {
 
 .hero-visual .frame {
   position: relative;
-  border-radius: 28px;
+  border-radius: 28px 0 0 28px;
   overflow: hidden;
-  aspect-ratio: 4/5;
+  height: clamp(440px, 78vh, 800px);
   box-shadow: 0 40px 80px -40px rgba(46, 41, 38, 0.45);
 }
 
@@ -443,15 +446,21 @@ h1, h2, h3, h4 {
   background: var(--cream);
 }
 
-.hero-visual .frame.frame-blur img {
-  filter: blur(3px);
-  transform: scale(1.08);
-  mask-image: radial-gradient(circle at 50% 42%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
-  -webkit-mask-image: radial-gradient(circle at 50% 42%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+.hero-visual .frame.frame-blur::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: linear-gradient(to right, var(--cream) 0%, rgba(250, 245, 239, 0.35) 16%, rgba(250, 245, 239, 0) 30%);
+  mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 22%, rgba(0,0,0,0) 32%);
+  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 22%, rgba(0,0,0,0) 32%);
+  pointer-events: none;
 }
 
 .hero-visual:hover .frame.frame-blur img {
-  transform: scale(1.12);
+  transform: scale(1.0);
 }
 
 .hero-visual:hover .frame img {
@@ -460,8 +469,9 @@ h1, h2, h3, h4 {
 
 .hero-visual .floating-card {
   position: absolute;
+  z-index: 2;
   bottom: -28px;
-  left: -38px;
+  left: 24px;
   background: var(--white);
   padding: 18px 26px;
   border-radius: 18px;
@@ -1449,7 +1459,21 @@ h1, h2, h3, h4 {
     grid-template-columns: 1fr;
   }
 
+  .hero {
+    padding-right: var(--pad);
+  }
+
+  .hero-content {
+    max-width: none;
+    padding-right: 0;
+  }
+
   .hero-visual { order: -1; }
+
+  .hero-visual .frame {
+    border-radius: 28px;
+    height: clamp(360px, 60vh, 620px);
+  }
 
   .case-grid,
   .services-grid {
