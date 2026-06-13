@@ -463,14 +463,12 @@ h1, h2, h3, h4 {
   background: var(--cream);
 }
 
-.hero-visual .frame.frame-blur::before {
-  content: "";
+.hero-visual .frame.frame-blur .blur-edge {
   position: absolute;
   inset: 0;
   z-index: 1;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  background: linear-gradient(to right, var(--cream) 0%, rgba(250, 245, 239, 0.35) 16%, rgba(250, 245, 239, 0) 30%);
+  filter: blur(20px);
+  transform: scale(1.15);
   mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 22%, rgba(0,0,0,0) 32%);
   -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 22%, rgba(0,0,0,0) 32%);
   pointer-events: none;
@@ -482,6 +480,10 @@ h1, h2, h3, h4 {
 
 .hero-visual:hover .frame img {
   transform: scale(1.0);
+}
+
+.hero-visual:hover .frame.frame-blur .blur-edge {
+  transform: scale(1.15);
 }
 
 .hero-visual .floating-card {
